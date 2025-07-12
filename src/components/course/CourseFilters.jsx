@@ -261,14 +261,6 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
         </Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
           <Chip
-            label="Miễn phí"
-            variant={filters.priceRange?.[0] === 0 && filters.priceRange?.[1] === 0 ? 'filled' : 'outlined'}
-            color="primary"
-            size="small"
-            onClick={() => handleFilterChange('priceRange', [0, 0])}
-            clickable
-          />
-          <Chip
             label="Dưới 1 triệu"
             variant={filters.priceRange?.[1] <= 1000000 && filters.priceRange?.[0] === 0 ? 'filled' : 'outlined'}
             color="primary"
