@@ -261,7 +261,7 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
         </Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
           <Chip
-            label="0"
+            label="Miễn phí"
             variant={filters.priceRange?.[0] === 0 && filters.priceRange?.[1] === 0 ? 'filled' : 'outlined'}
             color="primary"
             size="small"
