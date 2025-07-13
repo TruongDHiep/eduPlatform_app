@@ -22,7 +22,7 @@ const FavoritesPage = () => {
   const favorites = useSelector(selectFavorites)
   const courses = useSelector(selectCourses)
 
-  const [viewMode, setViewMode] = useState('grid') // 'grid' or 'list'
+  const [viewMode, setViewMode] = useState('grid')
 
   // Redux actions
   const handleToggleFavorite = (course) => {
@@ -41,7 +41,6 @@ const FavoritesPage = () => {
     dispatch(openCourseDetail(course))
   }
 
-  // Get favorite courses from context
   const favoriteCourses = courses.filter(course => favorites.includes(course.id))
 
   return (

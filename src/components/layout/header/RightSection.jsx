@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IconButton, Badge, Menu, MenuItem, Box } from '@mui/material'
-import { FavoriteBorder, Person, Notifications, History, School } from '@mui/icons-material'
+import { IconButton, Badge, Menu, MenuItem, Box, Dialog, DialogContent } from '@mui/material'
+import { FavoriteBorder, Person, Notifications, History, School, Search as SearchIcon } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectFavorites } from '~/redux/slices/coursesSlice'
 import { openFavorites } from '~/redux/slices/uiSlice'
@@ -14,6 +14,7 @@ function RightSection() {
   const favorites = useSelector(selectFavorites)
 
   const [anchorEl, setAnchorEl] = useState(null)
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,19 +43,37 @@ function RightSection() {
 
   return (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1, md: 2 } }}>
         {/* Search Bar */}
-        <Box sx={{ width: 350 }}>
+        <Box sx={{
+          width: { xs: 200, sm: 280, md: 350 },
+          display: { xs: 'none', sm: 'block' }
+        }}>
           <SearchBar />
         </Box>
 
         {/* Icons */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          {/* Mobile Search Button */}
+          <IconButton
+            color="inherit"
+            onClick={() => setMobileSearchOpen(true)}
+            sx={{
+              mr: { xs: 0.5, sm: 1 },
+              display: { xs: 'block', sm: 'none' }
+            }}
+            title="Tìm kiếm"
+            size="small"
+          >
+            <SearchIcon />
+          </IconButton>
+
           <IconButton
             color="inherit"
             onClick={() => navigate('/history')}
-            sx={{ mr: 1 }}
+            sx={{ mr: { xs: 0.5, sm: 1 } }}
             title="Lịch sử xem"
+            size={window.innerWidth < 600 ? 'small' : 'medium'}
           >
             <History />
           </IconButton>
@@ -62,15 +81,20 @@ function RightSection() {
           <IconButton
             color="inherit"
             onClick={handleOpenFavorites}
-            sx={{ mr: 1 }}
+            sx={{ mr: { xs: 0.5, sm: 1 } }}
             title="Khóa học yêu thích"
+            size={window.innerWidth < 600 ? 'small' : 'medium'}
           >
             <Badge badgeContent={favorites.length} color="error">
               <FavoriteBorder />
             </Badge>
           </IconButton>
 
-          <IconButton color="inherit" sx={{ mr: 1 }}>
+          <IconButton
+            color="inherit"
+            sx={{ mr: { xs: 0.5, sm: 1 } }}
+            size={window.innerWidth < 600 ? 'small' : 'medium'}
+          >
             <Badge badgeContent={3} color="error">
               <Notifications />
             </Badge>
@@ -82,6 +106,7 @@ function RightSection() {
             aria-haspopup="true"
             onClick={handleProfileMenuOpen}
             color="inherit"
+            size={window.innerWidth < 600 ? 'small' : 'medium'}
           >
             <Person />
           </IconButton>
@@ -124,6 +149,19 @@ function RightSection() {
           Lịch sử học tập
         </MenuItem>
       </Menu>
+
+      {/* Mobile Search Dialog */}
+      <Dialog
+        open={mobileSearchOpen}
+        onClose={() => setMobileSearchOpen(false)}
+        fullWidth
+        maxWidth="sm"
+        sx={{ display: { xs: 'block', sm: 'none' } }}
+      >
+        <DialogContent sx={{ p: 2 }}>
+          <SearchBar placeholder="Tìm kiếm khóa học..." />
+        </DialogContent>
+      </Dialog>
     </>
   )
 }

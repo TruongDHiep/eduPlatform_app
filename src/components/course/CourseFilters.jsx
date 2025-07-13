@@ -98,10 +98,20 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
   }, [])
 
   const FilterContent = () => (
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: { xs: 1.5, sm: 2 } }}>
       {/* Filter Header */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        mb: { xs: 1.5, sm: 2 },
+        flexDirection: { xs: 'column', sm: 'row' },
+        gap: { xs: 1, sm: 0 }
+      }}>
+        <Typography variant="h6" sx={{
+          fontWeight: 'bold',
+          fontSize: { xs: '1.1rem', sm: '1.25rem' }
+        }}>
           Bộ lọc
         </Typography>
         {hasActiveFilters && (
@@ -109,7 +119,10 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
             size="small"
             onClick={clearAllFilters}
             startIcon={<Clear />}
-            sx={{ color: 'text.secondary' }}
+            sx={{
+              color: 'text.secondary',
+              fontSize: { xs: '0.75rem', sm: '0.875rem' }
+            }}
           >
             Xóa tất cả
           </Button>
@@ -117,18 +130,29 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
       </Box>
 
       {/* Results Count */}
-      <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{
+          mb: { xs: 2, sm: 3 },
+          fontSize: { xs: '0.8rem', sm: '0.875rem' },
+          textAlign: { xs: 'center', sm: 'left' }
+        }}
+      >
         {resultsCount} khóa học được tìm thấy
       </Typography>
 
       {/* Sort By */}
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ mb: { xs: 2, sm: 3 } }}>
         <FormControl fullWidth size="small">
-          <InputLabel>Sắp xếp theo</InputLabel>
+          <InputLabel sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>Sắp xếp theo</InputLabel>
           <Select
             value={filters.sortBy || 'newest'}
             label="Sắp xếp theo"
             onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+            sx={{
+              fontSize: { xs: '0.8rem', sm: '0.875rem' }
+            }}
           >
             <MenuItem value="newest">Mới nhất</MenuItem>
             <MenuItem value="popular">Phổ biến nhất</MenuItem>
@@ -140,25 +164,37 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
       </Box>
 
       {/* Level Filter */}
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ mb: { xs: 2, sm: 3 } }}>
         <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            cursor: 'pointer',
+            py: { xs: 1, sm: 0 }
+          }}
           onClick={() => toggleSection('level')}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="subtitle1" sx={{
+            fontWeight: 'bold',
+            fontSize: { xs: '0.9rem', sm: '1rem' }
+          }}>
             Cấp độ
           </Typography>
           {openSections.level ? <ExpandLess /> : <ExpandMore />}
         </Box>
 
         <Collapse in={openSections.level}>
-          <Box sx={{ mt: 2 }}>
+          <Box sx={{ mt: { xs: 1.5, sm: 2 } }}>
             <FormControl fullWidth size="small">
-              <InputLabel>Chọn cấp độ</InputLabel>
+              <InputLabel sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>Chọn cấp độ</InputLabel>
               <Select
                 value={filters.level || ''}
                 label="Chọn cấp độ"
                 onChange={(e) => handleFilterChange('level', e.target.value)}
+                sx={{
+                  fontSize: { xs: '0.8rem', sm: '0.875rem' }
+                }}
               >
                 <MenuItem value="">Tất cả cấp độ</MenuItem>
                 {LEVELS.map((level) => (
@@ -173,19 +209,28 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
       </Box>
 
       {/* Price Range Filter */}
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ mb: { xs: 2, sm: 3 } }}>
         <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            cursor: 'pointer',
+            py: { xs: 1, sm: 0 }
+          }}
           onClick={() => toggleSection('price')}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="subtitle1" sx={{
+            fontWeight: 'bold',
+            fontSize: { xs: '0.9rem', sm: '1rem' }
+          }}>
             Khoảng giá
           </Typography>
           {openSections.price ? <ExpandLess /> : <ExpandMore />}
         </Box>
 
         <Collapse in={openSections.price}>
-          <Box sx={{ mt: 2, px: 1 }}>
+          <Box sx={{ mt: { xs: 1.5, sm: 2 }, px: { xs: 0.5, sm: 1 } }}>
             <Slider
               value={localPriceRange}
               onChange={priceHandlers.onChange}
@@ -201,17 +246,30 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
                 { value: 3000000, label: '3M' },
                 { value: PRICE_RANGE[1], label: '5M+' }
               ]}
+              sx={{
+                '& .MuiSlider-markLabel': {
+                  fontSize: { xs: '0.7rem', sm: '0.75rem' }
+                }
+              }}
             />
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1 }}>
+            <Box sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              mt: 1,
+              flexDirection: { xs: 'column', sm: 'row' },
+              gap: { xs: 1, sm: 0 }
+            }}>
               <Chip
                 label={`${formatPrice(localPriceRange[0])} VND`}
                 size="small"
                 variant="outlined"
+                sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
               />
               <Chip
                 label={`${formatPrice(localPriceRange[1])} VND`}
                 size="small"
                 variant="outlined"
+                sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
               />
             </Box>
           </Box>
@@ -219,19 +277,28 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
       </Box>
 
       {/* Rating Filter */}
-      <Box sx={{ mb: 3 }}>
+      <Box sx={{ mb: { xs: 2, sm: 3 } }}>
         <Box
-          sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer' }}
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            cursor: 'pointer',
+            py: { xs: 1, sm: 0 }
+          }}
           onClick={() => toggleSection('rating')}
         >
-          <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          <Typography variant="subtitle1" sx={{
+            fontWeight: 'bold',
+            fontSize: { xs: '0.9rem', sm: '1rem' }
+          }}>
             Đánh giá tối thiểu
           </Typography>
           {openSections.rating ? <ExpandLess /> : <ExpandMore />}
         </Box>
 
         <Collapse in={openSections.rating}>
-          <Box sx={{ mt: 2, px: 1 }}>
+          <Box sx={{ mt: { xs: 1.5, sm: 2 }, px: { xs: 0.5, sm: 1 } }}>
             <Slider
               value={localRating}
               onChange={ratingHandlers.onChange}
@@ -247,7 +314,10 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
                 { value: 5, label: '5★' }
               ]}
               sx={{
-                color: '#FAAF00'
+                color: '#FAAF00',
+                '& .MuiSlider-markLabel': {
+                  fontSize: { xs: '0.7rem', sm: '0.75rem' }
+                }
               }}
             />
           </Box>
@@ -255,11 +325,20 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
       </Box>
 
       {/* Quick Filters */}
-      <Box sx={{ mb: 2 }}>
-        <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 2 }}>
+      <Box sx={{ mb: { xs: 1, sm: 2 } }}>
+        <Typography variant="subtitle1" sx={{
+          fontWeight: 'bold',
+          mb: { xs: 1.5, sm: 2 },
+          fontSize: { xs: '0.9rem', sm: '1rem' }
+        }}>
           Bộ lọc nhanh
         </Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+        <Box sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: { xs: 0.5, sm: 1 },
+          justifyContent: { xs: 'center', sm: 'flex-start' }
+        }}>
           <Chip
             label="Dưới 1 triệu"
             variant={filters.priceRange?.[1] <= 1000000 && filters.priceRange?.[0] === 0 ? 'filled' : 'outlined'}
@@ -267,6 +346,7 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
             size="small"
             onClick={() => handleFilterChange('priceRange', [0, 1000000])}
             clickable
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
           />
           <Chip
             label="4★ trở lên"
@@ -275,6 +355,7 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
             size="small"
             onClick={() => handleFilterChange('minRating', 4)}
             clickable
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
           />
           <Chip
             label="Phổ biến"
@@ -283,6 +364,7 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
             size="small"
             onClick={() => handleFilterChange('sortBy', 'popular')}
             clickable
+            sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
           />
         </Box>
       </Box>
@@ -290,7 +372,16 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
   )
 
   return (
-    <Paper elevation={1} sx={{ position: 'sticky', top: 16, backgroundColor: 'transparent' }}>
+    <Paper
+      elevation={1}
+      sx={{
+        position: { xs: 'static', md: 'sticky' },
+        top: { xs: 0, md: 16 },
+        backgroundColor: 'transparent',
+        maxHeight: { xs: 'auto', md: 'calc(100vh - 120px)' },
+        overflowY: { xs: 'visible', md: 'auto' }
+      }}
+    >
       <FilterContent />
     </Paper>
   )

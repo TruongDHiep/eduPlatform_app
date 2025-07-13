@@ -119,8 +119,8 @@ function SearchBar({ placeholder = 'Tìm kiếm khóa học...', sx = {} }) {
             ml: 1,
             flex: 1,
             '& input': {
-              padding: '12px 8px',
-              fontSize: '0.95rem',
+              padding: { xs: '8px 4px', sm: '12px 8px' },
+              fontSize: { xs: '0.875rem', sm: '0.95rem' },
               '&::placeholder': {
                 color: 'text.secondary',
                 opacity: 0.7
@@ -194,9 +194,9 @@ function SearchBar({ placeholder = 'Tìm kiếm khóa học...', sx = {} }) {
                     src={course.image || ''}
                     alt={course.title || 'Course'}
                     sx={{
-                      width: 40,
-                      height: 40,
-                      mr: 2,
+                      width: { xs: 32, sm: 40 },
+                      height: { xs: 32, sm: 40 },
+                      mr: { xs: 1.5, sm: 2 },
                       borderRadius: 1
                     }}
                   />
@@ -207,7 +207,8 @@ function SearchBar({ placeholder = 'Tìm kiếm khóa học...', sx = {} }) {
                         fontWeight: 600,
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
+                        whiteSpace: 'nowrap',
+                        fontSize: { xs: '0.8rem', sm: '0.875rem' }
                       }}
                     >
                       {course.title || 'Khóa học chưa có tên'}

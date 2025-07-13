@@ -46,12 +46,14 @@ function FavoritesModal({ open, onClose, favorites, onViewDetails }) {
         onClose={onClose}
         maxWidth="lg"
         fullWidth
+        fullScreen={{ xs: true, md: false }}
         PaperProps={{
           sx: {
-            borderRadius: 2,
-            maxHeight: '90vh',
-            minHeight: '60vh',
-            width: '100%'
+            borderRadius: { xs: 0, sm: 2 },
+            maxHeight: { xs: '100vh', sm: '90vh' },
+            minHeight: { xs: '100vh', sm: '60vh' },
+            width: '100%',
+            m: { xs: 0, sm: 2 }
           }
         }}
       >
@@ -61,12 +63,20 @@ function FavoritesModal({ open, onClose, favorites, onViewDetails }) {
             justifyContent: 'space-between',
             alignItems: 'center',
             borderBottom: 1,
-            borderColor: 'divider'
+            borderColor: 'divider',
+            flexDirection: { xs: 'column', sm: 'row' },
+            gap: { xs: 1, sm: 0 },
+            px: { xs: 2, sm: 3 },
+            py: { xs: 2, sm: 2 }
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Favorite sx={{ color: '#f44336', mr: 1 }} />
-            <Typography variant="h5" component="div" sx={{ fontWeight: 'bold', color: '#03045e' }}>
+            <Typography variant="h5" component="div" sx={{
+              fontWeight: 'bold',
+              color: '#03045e',
+              fontSize: { xs: '1.25rem', sm: '1.5rem' }
+            }}>
               Khóa học yêu thích ({favorites.length})
             </Typography>
           </Box>
@@ -89,16 +99,22 @@ function FavoritesModal({ open, onClose, favorites, onViewDetails }) {
           </Box>
         </DialogTitle>
 
-        <DialogContent sx={{ p: 0, minHeight: '300px', maxHeight: '70vh', overflowY: 'auto' }}>
+        <DialogContent sx={{
+          p: 0,
+          minHeight: { xs: '400px', sm: '300px' },
+          maxHeight: { xs: 'calc(100vh - 150px)', sm: '70vh' },
+          overflowY: 'auto'
+        }}>
           {favorites.length === 0 ? (
             <EmptyFavoritesState />
           ) : (
-            <Box sx={{ p: 3 }}>
-              <Grid container spacing={3}>
+            <Box sx={{ p: { xs: 2, sm: 3 } }}>
+              <Grid container spacing={{ xs: 2, sm: 3 }}>
                 {favorites.map((course) => (
                   <Grid item xs={12} sm={6} md={4} key={course.id}>
                     <Box sx={{
-                      width: 350,
+                      width: { xs: '100%', sm: 350 },
+                      maxWidth: 350,
                       height: 450,
                       display: 'flex',
                       mx: 'auto'
