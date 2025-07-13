@@ -37,7 +37,7 @@ function CourseDetailModal({ course, open, onClose, onToggleFavorite, isFavorite
       onClose={onClose}
       maxWidth="md"
       fullWidth
-      fullScreen={{ xs: true, sm: false }}
+      fullScreen={window.innerWidth < 768}
       PaperProps={{
         sx: {
           borderRadius: { xs: 0, sm: 2 },

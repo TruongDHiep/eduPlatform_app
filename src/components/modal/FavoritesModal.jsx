@@ -46,7 +46,7 @@ function FavoritesModal({ open, onClose, favorites, onViewDetails }) {
         onClose={onClose}
         maxWidth="lg"
         fullWidth
-        fullScreen={{ xs: true, md: false }}
+        fullScreen={window.innerWidth < 768}
         PaperProps={{
           sx: {
             borderRadius: { xs: 0, sm: 2 },
