@@ -37,10 +37,12 @@ function CourseDetailModal({ course, open, onClose, onToggleFavorite, isFavorite
       onClose={onClose}
       maxWidth="md"
       fullWidth
+      fullScreen={{ xs: true, sm: false }}
       PaperProps={{
         sx: {
-          borderRadius: 2,
-          maxHeight: '90vh'
+          borderRadius: { xs: 0, sm: 2 },
+          maxHeight: { xs: '100vh', sm: '90vh' },
+          m: { xs: 0, sm: 2 }
         }
       }}
     >
@@ -49,16 +51,24 @@ function CourseDetailModal({ course, open, onClose, onToggleFavorite, isFavorite
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          pb: 1
+          pb: 1,
+          px: { xs: 2, sm: 3 },
+          pt: { xs: 2, sm: 3 }
         }}
       >
-        <Typography variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
+        <Typography variant="h5" component="div" sx={{
+          fontWeight: 'bold',
+          fontSize: { xs: '1.25rem', sm: '1.5rem' }
+        }}>
           Chi tiết khóa học
         </Typography>
         <IconButton
           onClick={onClose}
           edge="end"
           color="error"
+          sx={{
+            p: { xs: 1, sm: 1 }
+          }}
         >
           <Close />
         </IconButton>
@@ -72,7 +82,7 @@ function CourseDetailModal({ course, open, onClose, onToggleFavorite, isFavorite
             alt={course.title}
             style={{
               width: '100%',
-              height: '300px',
+              height: window.innerWidth < 600 ? '200px' : '300px',
               objectFit: 'cover'
             }}
           />

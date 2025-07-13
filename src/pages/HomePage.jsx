@@ -40,7 +40,7 @@ function HomePage() {
   const searchQuery = useSelector(selectSearchQuery)
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1)
-  const coursesPerPage = 9 // 3x3 grid
+  const coursesPerPage = 9
 
   // Redux actions
   const handleCourseClick = (course) => {
@@ -100,17 +100,23 @@ function HomePage() {
         <CourseSuggestions />
 
         {/* ai suggest section */}
-        <Box sx={{ display: 'flex', gap: 4, alignItems: 'flex-start' }}>
+        <Box sx={{
+          display: 'flex',
+          gap: { xs: 0, md: 4 },
+          alignItems: 'flex-start',
+          flexDirection: { xs: 'column', md: 'row' }
+        }}>
           <Box
             sx={{
-              width: 280,
+              width: { xs: '100%', md: 280 },
               flexShrink: 0,
-              position: 'sticky',
+              position: { xs: 'static', md: 'sticky' },
               top: 24,
-              maxHeight: 'calc(100vh - 120px)',
-              overflowY: 'auto',
+              maxHeight: { xs: 'auto', md: 'calc(100vh - 120px)' },
+              overflowY: { xs: 'visible', md: 'auto' },
               borderRadius: 2,
-              boxShadow: 1
+              boxShadow: { xs: 0, md: 1 },
+              mb: { xs: 3, md: 0 }
             }}
           >
             <CourseFilters
@@ -120,11 +126,19 @@ function HomePage() {
             />
           </Box>
 
-          <Box sx={{ flex: 1 }}>
+          <Box sx={{ flex: 1, width: { xs: '100%', md: 'auto' } }}>
             {/* Results Info */}
             {filteredCourses.length > 0 && (
-              <Paper sx={{ p: 2, mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="body1" color="text.secondary">
+              <Paper sx={{
+                p: { xs: 1.5, md: 2 },
+                mb: 3,
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: { xs: 1, sm: 0 }
+              }}>
+                <Typography variant="body1" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>
                   Hiển thị {startIndex + 1}-{Math.min(endIndex, filteredCourses.length)} trong tổng số {filteredCourses.length} khóa học
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
@@ -133,11 +147,15 @@ function HomePage() {
               </Paper>
             )}
 
-            <Grid container spacing={3}>
+            <Grid container spacing={{ xs: 2, md: 3 }} justifyContent="center">
               {filteredCourses.length > 0 ? (
                 currentCourses.map((course) => (
-                  <Grid item key={course.id}>
-                    <Box sx={{ width: 350, height: 450 }}>
+                  <Grid item xs={12} sm={6} md={4} key={course.id} sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Box sx={{
+                      width: { xs: '100%', sm: 350 },
+                      maxWidth: 350,
+                      height: 450
+                    }}>
                       <CourseCard
                         course={course}
                         isFavorite={favorites.includes(course.id)}

@@ -35,13 +35,14 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
         flexDirection: 'column',
         cursor: 'pointer',
         transition: 'all 0.3s ease-in-out',
-        transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
-        boxShadow: isHovered
-          ? '0 12px 40px rgba(0,0,0,0.15)'
-          : '0 4px 20px rgba(0,0,0,0.08)',
+        transform: { xs: 'none', md: isHovered ? 'translateY(-8px)' : 'translateY(0)' },
+        boxShadow: {
+          xs: '0 2px 8px rgba(0,0,0,0.1)',
+          md: isHovered ? '0 12px 40px rgba(0,0,0,0.15)' : '0 4px 20px rgba(0,0,0,0.08)'
+        },
         '&:hover': {
           '& .MuiCardMedia-img': {
-            transform: 'scale(1.05)'
+            transform: { xs: 'none', md: 'scale(1.05)' }
           }
         }
       }}
@@ -52,13 +53,13 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
       <Box sx={{ position: 'relative', overflow: 'hidden' }}>
         <CardMedia
           component="img"
-          height="200"
+          height={{ xs: 180, sm: 200 }}
           image={course.image}
           alt={course.title}
           sx={{
             transition: 'transform 0.3s ease-in-out',
             '&:hover': {
-              transform: 'scale(1.05)'
+              transform: { xs: 'none', md: 'scale(1.05)' }
             }
           }}
         />
@@ -67,9 +68,11 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
         <IconButton
           sx={{
             position: 'absolute',
-            top: 8,
-            right: 8,
+            top: { xs: 6, sm: 8 },
+            right: { xs: 6, sm: 8 },
             backgroundColor: 'white',
+            width: { xs: 32, sm: 40 },
+            height: { xs: 32, sm: 40 },
             '&:hover': {
               backgroundColor: 'rgba(255, 255, 255, 0.8)',
               boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)'
@@ -91,10 +94,11 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
           size="small"
           sx={{
             position: 'absolute',
-            top: 8,
-            left: 8,
+            top: { xs: 6, sm: 8 },
+            left: { xs: 6, sm: 8 },
             backgroundColor: 'rgba(255, 255, 255, 0.9)',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            fontSize: { xs: '0.7rem', sm: '0.75rem' }
           }}
         />
 
@@ -102,15 +106,15 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
         <Box
           sx={{
             position: 'absolute',
-            bottom: 8,
-            left: 8,
+            bottom: { xs: 6, sm: 8 },
+            left: { xs: 6, sm: 8 },
             backgroundColor: course.level === 'Beginner' ? '#4caf50' :
               course.level === 'Intermediate' ? '#ff9800' : '#f44336',
             color: 'white',
-            px: 1,
+            px: { xs: 0.5, sm: 1 },
             py: 0.5,
             borderRadius: 1,
-            fontSize: '0.75rem',
+            fontSize: { xs: '0.7rem', sm: '0.75rem' },
             fontWeight: 'bold'
           }}
         >
@@ -118,7 +122,7 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
         </Box>
       </Box>
 
-      <CardContent sx={{ flexGrow: 1, p: 2 }}>
+      <CardContent sx={{ flexGrow: 1, p: { xs: 1.5, sm: 2 } }}>
         <Typography
           variant="h6"
           component="h3"
@@ -130,7 +134,8 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
             WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
-            minHeight: '3.2em'
+            minHeight: '3.2em',
+            fontSize: { xs: '1rem', sm: '1.25rem' }
           }}
         >
           {course.title}
@@ -140,31 +145,32 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
           variant="body2"
           color="text.secondary"
           sx={{
-            mb: 2,
+            mb: { xs: 1.5, sm: 2 },
             display: '-webkit-box',
             WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden',
-            minHeight: '2.4em'
+            minHeight: '2.4em',
+            fontSize: { xs: '0.8rem', sm: '0.875rem' }
           }}
         >
           {course.description}
         </Typography>
 
         {/* Instructor */}
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1.5, sm: 2 } }}>
           <Avatar
             src={course.instructor.avatar}
             alt={course.instructor.name}
-            sx={{ width: 32, height: 32, mr: 1 }}
+            sx={{ width: { xs: 28, sm: 32 }, height: { xs: 28, sm: 32 }, mr: 1 }}
           />
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
             {course.instructor.name}
           </Typography>
         </Box>
 
         {/* Rating */}
-        <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 1.5, sm: 2 } }}>
           <Rating
             value={course.rating}
             precision={0.1}
@@ -172,37 +178,44 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
             readOnly
             sx={{ mr: 1 }}
           />
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
             {course.rating} ({course.reviews} đánh giá)
           </Typography>
         </Box>
 
         {/* Course stats */}
-        <Box sx={{ display: 'flex', gap: 2, mb: 2 }}>
+        <Box sx={{ display: 'flex', gap: { xs: 1, sm: 2 }, mb: { xs: 1.5, sm: 2 } }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <AccessTime sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
-            <Typography variant="body2" color="text.secondary">
+            <AccessTime sx={{ fontSize: { xs: 14, sm: 16 }, mr: 0.5, color: 'text.secondary' }} />
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
               {formatDuration(course.duration)}
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <People sx={{ fontSize: 16, mr: 0.5, color: 'text.secondary' }} />
-            <Typography variant="body2" color="text.secondary">
+            <People sx={{ fontSize: { xs: 14, sm: 16 }, mr: 0.5, color: 'text.secondary' }} />
+            <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
               {course.students.toLocaleString()}
             </Typography>
           </Box>
         </Box>
 
         {/* Price and action */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 'auto' }}>
-          <Box>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mt: 'auto',
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 1, sm: 0 }
+        }}>
+          <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
             {course.originalPrice && course.originalPrice > course.price && (
               <Typography
                 variant="body2"
                 sx={{
                   textDecoration: 'line-through',
                   color: 'text.secondary',
-                  fontSize: '0.875rem'
+                  fontSize: { xs: '0.75rem', sm: '0.875rem' }
                 }}
               >
                 {formatPrice(course.originalPrice)}
@@ -212,7 +225,8 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
               variant="h6"
               sx={{
                 fontWeight: 'bold',
-                color: course.originalPrice && course.originalPrice > course.price ? '#f44336' : 'text.primary'
+                color: course.originalPrice && course.originalPrice > course.price ? '#f44336' : 'text.primary',
+                fontSize: { xs: '1rem', sm: '1.25rem' }
               }}
             >
               {course.price === 0 ? 'Miễn phí' : formatPrice(course.price)}
@@ -225,7 +239,9 @@ function CourseCard({ course, onToggleFavorite, isFavorite, onViewDetails }) {
             size="small"
             sx={{
               minWidth: 'auto',
-              px: 2
+              px: { xs: 1.5, sm: 2 },
+              fontSize: { xs: '0.75rem', sm: '0.875rem' },
+              width: { xs: '100%', sm: 'auto' }
             }}
             onClick={(e) => {
               e.stopPropagation()
