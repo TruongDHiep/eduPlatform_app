@@ -340,15 +340,6 @@ function CourseFilters({ filters, onFiltersChange, resultsCount = 0 }) {
           justifyContent: { xs: 'center', sm: 'flex-start' }
         }}>
           <Chip
-            label="Miễn phí"
-            variant={filters.priceRange?.[0] === 0 && filters.priceRange?.[1] === 0 ? 'filled' : 'outlined'}
-            color="primary"
-            size="small"
-            onClick={() => handleFilterChange('priceRange', [0, 0])}
-            clickable
-            sx={{ fontSize: { xs: '0.7rem', sm: '0.75rem' } }}
-          />
-          <Chip
             label="Dưới 1 triệu"
             variant={filters.priceRange?.[1] <= 1000000 && filters.priceRange?.[0] === 0 ? 'filled' : 'outlined'}
             color="primary"
